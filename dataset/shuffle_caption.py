@@ -13,7 +13,7 @@ def encode_image(image_path):
         return base64.b64encode(image_file.read()).decode('utf-8')
 
 # Specify the directory to look for images
-directory = 'original/data1'
+directory = 'original/data'
 
 # Define the supported image formats
 image_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.gif')
