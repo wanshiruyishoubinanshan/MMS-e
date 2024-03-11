@@ -4,15 +4,6 @@ import numpy as np
 import random
 
 def find_images(directory):
-    """
-    Find all image files in the given directory and its subdirectories.
-    
-    Args:
-    - directory (str): The path to the directory.
-    
-    Returns:
-    - list of str: A list of paths to the image files.
-    """
     image_paths = []
     for root, _, files in os.walk(directory):
         for file in files:
@@ -21,14 +12,6 @@ def find_images(directory):
     return image_paths
 
 def split_shuffle_and_fix_patches(image_path, output_dir,fix_num):
-    """
-    Split the image into 4x4 patches, randomly fix the position of 4 patches,
-    shuffle the remaining patches, and save the shuffled image with fixed patches.
-    
-    Args:
-    - image_path (str): The path to the image file.
-    - output_dir (str): The directory to save the processed images.
-    """
     try:
         # Load the image
         img = Image.open(image_path)
@@ -42,7 +25,6 @@ def split_shuffle_and_fix_patches(image_path, output_dir,fix_num):
         patches = [img.crop((i * patch_width, j * patch_height, (i+1) * patch_width, (j+1) * patch_height)) 
                    for i in range(4) for j in range(4)]
 
-        # Randomly fix the position of 4 patches, shuffle the remaining
         fixed_indices = set(random.sample(range(16), fix_num))
         non_fixed_patches = [patch for idx, patch in enumerate(patches) if idx not in fixed_indices]
         random.shuffle(non_fixed_patches)
