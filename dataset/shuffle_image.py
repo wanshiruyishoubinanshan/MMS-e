@@ -52,7 +52,7 @@ data_dir = 'original/data'
 
 for patch_num in patch_num_list:
   # Change this to your actual data directory
-    output_dir = f"Patchwise_Q/{patch_num}x{patch_num}"
+    output_dir = f"Patchwise_QA/{patch_num}x{patch_num}"
 
     # Find all images in the data directory
     image_paths = find_images(data_dir)
