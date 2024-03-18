@@ -1,9 +1,9 @@
 #!/bin/bash
 
-WORKSPACE_PATH="/data1/leijiayi/LLaMA2-Accessory/accessory/eval_mm/MMS-e" # Please put your absolute workspace path here. It will be used as root folder for all the following folders.
-GROUND_TRUTH_FOLDER="lab3/stable12/annotations" # The input folder of the ground truth answers.
-MODEL_PREDICT_FOLDER="lab3/stable12/results/adapter_results" # The input folder of your model predict answers.
-RESULT_OUTPUT_FOLDER="lab3/stable12/evaluate_results/adapter_evaluate_results" # The output folder of the gpt evaluate results. Python script will generate results here.
+WORKSPACE_PATH="path/to/MMS-e" # Please put your absolute workspace path here. It will be used as root folder for all the following folders.
+GROUND_TRUTH_FOLDER="original/annotations" # The input folder of the ground truth answers.
+MODEL_PREDICT_FOLDER="original/results/adapter_results" # The input folder of your model predict answers.
+RESULT_OUTPUT_FOLDER="original/evaluate_results/adapter_evaluate_results" # The output folder of the gpt evaluate results. Python script will generate results here.
 OPENAI_API_KEY="your_api_key" # Please put your openai key here
 
 # Function to get the prefix of a file path (everything except the last component)
@@ -45,6 +45,9 @@ function get_ground_truth_file() {
         *object_localization*) echo "object_localization.jsonl" ;;
         *text_recognition*) echo "text_recognition.jsonl" ;;
         *visual_reasoning*) echo "visual_reasoning.jsonl" ;;
+        *Function*) echo "Function.jsonl" ;;
+        *geo*) echo "geo.jsonl" ;;
+        *geo3D*) echo "geo3D.jsonl" ;;
         *) echo "unknown" ;;
     esac
 }
@@ -53,15 +56,16 @@ function get_ground_truth_file() {
 # Function to determine the appropriate evaluation script based on file name
 function get_evaluation_script() {
     local file_name="$1"
-    
+    # for QA task
     if [[ "$file_name" == *"action_recognition"* || "$file_name" == *"future_prediction"* || "$file_name" == *"image_scene"* || "$file_name" == *"image_topic"* || "$file_name" == *"instances_attributes"* || "$file_name" == *"instances_counting"* || "$file_name" == *"object_localization"* || "$file_name" == *"text_recognition"* || "$file_name" == *"visual_reasoning"* ]]; then
-        echo "gpt_evaluation_script_multichoice.py"
+        echo "scripts/gpt_evaluation_script_multichoice.py"
     elif [[ "$file_name" == *"artwork_recognition"* || "$file_name" == *"celebrity_recognition"* || "$file_name" == *"commonsense_reasoning"* ]]; then
-        echo "gpt_evaluation_script_judge.py"
+        echo "scripts/gpt_evaluation_script_judge.py"
     fi
-    #echo "gpt_evaluation_rebuild_img.py"
-    
 
+    # for Reconstruction task 
+    #echo "gpt_evaluation_rebuild_img.py"
+    #echo "gpt_evaluation_rebuild_caption.py"
 }
 
 # Main loop for file processing
@@ -70,7 +74,6 @@ echo "Starting evaluation of prediction files..."
 echo "========================================"
 
 find "$MODEL_PREDICT_FOLDER" -name "*.jsonl" | while read file; do
-    # 获取完整的文件名和文件所在的目录
     base_name=$(basename "$file")
     dir_name=$(dirname "$file")
    
