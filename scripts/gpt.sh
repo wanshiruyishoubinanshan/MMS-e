@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Define the paths for the answers folder, jsonl files, and base image folder
-ANSWERS_FOLDER="results/gpt_results" # The LLaVA output  
+ANSWERS_FOLDER="results/gpt_results"   
 JSONL_FILE_PATH="original/annotations"
 IMAGE_FOLDER_base="original/data"
-gpt_path="gpt.py" 
+gpt_path="scripts/gpt.py" 
 
 # Iterate over all .jsonl files in the jsonl folder
 for JSONL_FILE in "$JSONL_FILE_PATH"/*.jsonl; do
