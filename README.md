@@ -1,5 +1,4 @@
 # MMS-e: Benchmarking the Resilience of Large Multimodal Models to Visual Scrambling
-***
 ## Benchmark Examples
 ![Demo1](imgs/lab1.jpeg)
 Patchwise Question Answering: Divide the images into 2x2, 4x4, and 8x8 patches, then shuffle all the patches, and measure the ability of LMMs to answer questions about these images. 
