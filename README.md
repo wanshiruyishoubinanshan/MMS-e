@@ -23,7 +23,7 @@ Fixed Patch Question Answering: Divide the image into 4x4 patches, randomly fix 
 
  ## Evaluate on our Benchmark
 - **Install**  
-Download our benchmark image from our [Releases]()
+Download our benchmark image from our [Releases](https://huggingface.co/datasets/jyjyjyjy/MMS-e)
 ```Shell
 git clone git@github.com:wanshiruyishoubinanshan/MMS-e.git
 cd MMS-e
