@@ -41,7 +41,7 @@ Prepare your results in the following format, Key "prompt" is the input of the m
 }
 ```
 - **Rename your Jsonl file**  
-Rename your Jsonl file to ```xxxx_StyleName.jsonl``` like the following project tree. You must keep the style of the suffix consistent with the example.
+Rename your Jsonl file to ```xxxx_TaskName.jsonl``` like the following project tree. You must keep the style of the suffix consistent with the example.
 ```
 .
 ├── xxxxxxxx_action_recognition.jsonl
